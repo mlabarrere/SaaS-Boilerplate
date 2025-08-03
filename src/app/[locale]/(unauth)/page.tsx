@@ -1,4 +1,5 @@
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
+import type { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { CTA } from '@/templates/CTA';
 import { DemoBanner } from '@/templates/DemoBanner';
@@ -10,9 +11,10 @@ import { Navbar } from '@/templates/Navbar';
 import { Pricing } from '@/templates/Pricing';
 import { Sponsors } from '@/templates/Sponsors';
 
-export async function generateMetadata(props: { params: { locale: string } }) {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const t = await getTranslations({
-    locale: props.params.locale,
+    locale: params.locale,
     namespace: 'Index',
   });
 
@@ -22,8 +24,9 @@ export async function generateMetadata(props: { params: { locale: string } }) {
   };
 }
 
-const IndexPage = (props: { params: { locale: string } }) => {
-  unstable_setRequestLocale(props.params.locale);
+const IndexPage = async (props: { params: Promise<{ locale: string }> }) => {
+  const params = await props.params;
+  await setRequestLocale(params.locale);
 
   return (
     <>

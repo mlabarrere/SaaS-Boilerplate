@@ -10,6 +10,7 @@ const baseURL = `http://localhost:${PORT}`;
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: require.resolve('./playwright.global-setup'),
   testDir: './tests',
   // Look for files with the .spec.js or .e2e.js extension
   testMatch: '*.@(spec|e2e).?(c|m)[jt]s?(x)',
@@ -28,10 +29,14 @@ export default defineConfig({
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
   webServer: {
-    command: process.env.CI ? 'npm run start' : 'npm run dev:next',
+    command: 'next dev',
     url: baseURL,
     timeout: 2 * 60 * 1000,
     reuseExistingServer: !process.env.CI,
+    env: {
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!,
+      CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY!,
+    },
   },
 
   // Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions.

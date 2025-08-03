@@ -6,14 +6,17 @@ import { useEffect } from 'react';
 
 export default function GlobalError(props: {
   error: Error & { digest?: string };
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   useEffect(() => {
     Sentry.captureException(props.error);
   }, [props.error]);
 
+  // For global error, we'll use a default locale since we can't await params
+  const locale = 'en';
+
   return (
-    <html lang={props.params.locale}>
+    <html lang={locale}>
       <body>
         {/* `NextError` is the default Next.js error page component. Its type
         definition requires a `statusCode` prop. However, since the App Router

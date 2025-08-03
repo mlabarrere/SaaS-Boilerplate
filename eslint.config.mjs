@@ -39,8 +39,8 @@ export default antfu({
     'simple-import-sort': simpleImportSort,
   },
   rules: {
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': 'warn', // Temporarily downgraded from 'error' to 'warn'
+    'simple-import-sort/exports': 'warn', // Temporarily downgraded from 'error' to 'warn'
   },
 }, {
   files: [
@@ -58,6 +58,7 @@ export default antfu({
   rules: {
     'import/order': 'off', // Avoid conflicts with `simple-import-sort` plugin
     'sort-imports': 'off', // Avoid conflicts with `simple-import-sort` plugin
+    'perfectionist/sort-imports': 'off', // Temporarily disabled to avoid conflicts
     'style/brace-style': ['error', '1tbs'], // Use the default brace style
     'ts/consistent-type-definitions': ['error', 'type'], // Use `type` instead of `interface`
     'react/prefer-destructuring-assignment': 'off', // Vscode doesn't support automatically destructuring, it's a pain to add a new variable

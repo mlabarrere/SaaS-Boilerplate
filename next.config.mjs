@@ -24,8 +24,33 @@ export default withSentryConfig(
       },
       poweredByHeader: false,
       reactStrictMode: true,
+      serverExternalPackages: ['@electric-sql/pglite'],
+      
+      // Optimisations de performance
       experimental: {
-        serverComponentsExternalPackages: ['@electric-sql/pglite'],
+        // Optimise la compilation
+        optimizePackageImports: ['@clerk/nextjs', 'next-intl'],
+        // Améliore le cache
+        turbo: {
+          rules: {
+            '*.svg': {
+              loaders: ['@svgr/webpack'],
+              as: '*.js',
+            },
+          },
+        },
+      },
+      
+      // Optimisations webpack
+      webpack: (config, { dev, isServer }) => {
+        if (dev && !isServer) {
+          // Optimise le hot reload
+          config.watchOptions = {
+            poll: 1000,
+            aggregateTimeout: 300,
+          };
+        }
+        return config;
       },
     }),
   ),

@@ -1,7 +1,6 @@
 'use client';
 
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
-import Link from 'next/link';
 import { useLocale } from 'next-intl';
 
 import { ActiveLink } from '@/components/ActiveLink';
@@ -14,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
+import { Link } from '@/navigation';
 import { Logo } from '@/templates/Logo';
 import { getI18nPath } from '@/utils/Helpers';
 
@@ -103,10 +103,11 @@ export const DashboardHeader = (props: {
           <li>
             <UserButton
               userProfileMode="navigation"
-              userProfileUrl="/dashboard/user-profile"
+              userProfileUrl={getI18nPath('/dashboard/user-profile', locale)}
+              afterSignOutUrl="/"
               appearance={{
                 elements: {
-                  rootBox: 'px-2 py-1.5',
+                  userButtonTrigger: 'max-w-28 sm:max-w-52',
                 },
               }}
             />

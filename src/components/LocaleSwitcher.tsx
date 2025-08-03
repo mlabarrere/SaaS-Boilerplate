@@ -10,7 +10,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { usePathname, useRouter } from '@/libs/i18nNavigation';
+import { usePathname, useRouter } from '@/navigation';
 import { AppConfig } from '@/utils/AppConfig';
 
 export const LocaleSwitcher = () => {
@@ -19,8 +19,8 @@ export const LocaleSwitcher = () => {
   const locale = useLocale();
 
   const handleChange = (value: string) => {
-    router.push(pathname, { locale: value });
-    router.refresh();
+    // Use router.replace with locale to switch language for the current page
+    router.replace(pathname, { locale: value });
   };
 
   return (
