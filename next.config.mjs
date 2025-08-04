@@ -27,18 +27,17 @@ export default withSentryConfig(
       serverExternalPackages: ['@electric-sql/pglite'],
       
       // Optimisations de performance
+      turbopack: {
+        rules: {
+          '*.svg': {
+            loaders: ['@svgr/webpack'],
+            as: '*.js',
+          },
+        },
+      },
       experimental: {
         // Optimise la compilation
         optimizePackageImports: ['@clerk/nextjs', 'next-intl'],
-        // Améliore le cache
-        turbo: {
-          rules: {
-            '*.svg': {
-              loaders: ['@svgr/webpack'],
-              as: '*.js',
-            },
-          },
-        },
       },
       
       // Optimisations webpack

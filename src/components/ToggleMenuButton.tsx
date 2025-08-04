@@ -13,7 +13,7 @@ const ToggleMenuButtonInternal = (
   props: {
     onClick?: () => void;
   },
-  ref?: ForwardedRef<HTMLButtonElement>,
+  ref: ForwardedRef<HTMLButtonElement>,
 ) => (
   <Button
     className="p-2 focus-visible:ring-offset-0"

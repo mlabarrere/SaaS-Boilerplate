@@ -35,3 +35,7 @@ export async function register() {
     });
   }
 }
+
+export async function onRequestError({ error }: { error: Error }) {
+  Sentry.captureRequestError(error, { path: '' }, { error });
+}

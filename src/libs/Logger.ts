@@ -5,7 +5,7 @@ import pretty from 'pino-pretty';
 
 import { Env } from './Env';
 
-let stream: DestinationStream;
+let stream: DestinationStream | undefined;
 
 async function initializeLogger() {
   if (Env.LOGTAIL_SOURCE_TOKEN) {
@@ -30,4 +30,4 @@ async function initializeLogger() {
 // Initialize the logger
 initializeLogger().catch(console.error);
 
-export const logger = pino({ base: undefined }, stream);
+export const logger = pino({ base: undefined }, stream as DestinationStream);

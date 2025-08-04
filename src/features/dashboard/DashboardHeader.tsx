@@ -17,9 +17,11 @@ import { Link } from '@/navigation';
 import { Logo } from '@/templates/Logo';
 import { getI18nPath } from '@/utils/Helpers';
 
+
+
 export const DashboardHeader = (props: {
   menu: {
-    href: string;
+    href: any;
     label: string;
   }[];
 }) => {
