@@ -100,7 +100,7 @@
     "cross-env": "latest",
     "cssnano": "latest",
     "dotenv-cli": "latest",
-    "drizzle-kit": "^0.31.4",
+    "drizzle-kit": "^0.18.1",
     "eslint": "latest",
     "eslint-plugin-format": "latest",
     "eslint-plugin-jest-dom": "latest",
