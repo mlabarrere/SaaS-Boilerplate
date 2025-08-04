@@ -1,5 +1,7 @@
 import * as Sentry from '@sentry/nextjs';
 
+export const onRequestError = Sentry.captureRequestError;
+
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     // Node.js Sentry configuration
@@ -34,8 +36,4 @@ export async function register() {
       debug: false,
     });
   }
-}
-
-export async function onRequestError({ error }: { error: Error }) {
-  Sentry.captureRequestError(error, { path: '' }, { error });
 }
